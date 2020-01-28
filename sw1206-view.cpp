@@ -4,22 +4,6 @@
 
 using namespace std;
 
-/*int same(int sort_tmp[]){
-
-    int i,j;
-    int count=0;
-    for(i=0;i<5;i++){
-        for(j=i+1;j<5;j++){
-            if(sort_tmp[i]==sort_tmp[j]){
-                count++;
-            }
-        }
-    }
-    return count;
-
-}*/
-
-
 int main(){
 
 	int num=0;
