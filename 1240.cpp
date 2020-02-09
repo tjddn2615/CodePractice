@@ -15,6 +15,7 @@ int main(){
     int height,len;
 
     cin >> T;
+    //cout << T;
     for(t=1;t<T+1;t++){
         string input;
         char input_c[100];
@@ -25,7 +26,7 @@ int main(){
         for(i=0;i<height;i++){
             cin >> input;
             //cout << "input: " << input << endl; 
-            if(input.find("1")<=7 && input.find("1")>=0){
+            if(input.find("1")<=len && input.find("1")>=0){
                 string tmp;
                 for(j=i+1;j<height;j++){
                     cin>>tmp;
@@ -111,11 +112,11 @@ int main(){
             }
         }
 
-        //printf("hello");
-        //for(i=0;i<8;i++){
+        // printf("hello");
+        // for(i=0;i<8;i++){
         //    printf("%d ", input_i[i]);
-        //}
-        //printf("\n");
+        // }
+        // printf("\n");
         
         int result=(input_i[0]+input_i[2]+input_i[4]+input_i[6])*3+(input_i[1]+input_i[3]+input_i[5])+input_i[7];
         if(result%5==0){
