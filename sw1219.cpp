@@ -1,7 +1,11 @@
 #include <cstdio>
 #include <iostream>
 #include <queue>
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 11845312a97030f7452e96cefae91a32579fd0f7
 using namespace std;
  
  
@@ -14,6 +18,20 @@ int bfs(int src){
 	q.push(src);
 	visited[src] = 1;
 
+<<<<<<< HEAD
+=======
+
+int input[100][100]={-1};
+
+
+int bfs(int src){
+	queue<int> q;
+	int visited[100]={0};
+
+	q.push(src);
+	visited[src] = 1;
+
+>>>>>>> 11845312a97030f7452e96cefae91a32579fd0f7
 	while(!q.empty()){
 		int current=q.front();
 		q.pop();
@@ -28,10 +46,18 @@ int bfs(int src){
 				q.push(next);
 			}
 		}
+<<<<<<< HEAD
 	}
 	return 0;
 }
  
+=======
+
+	}
+	return 0;
+}
+
+>>>>>>> 11845312a97030f7452e96cefae91a32579fd0f7
 int main(){
 
 	int T;
@@ -57,8 +83,16 @@ int main(){
 		flag=bfs(0);
 
 		cout << "#" << test_case << " " << flag << endl;
+<<<<<<< HEAD
     }   
      
  
     return 0;
 }
+=======
+	}	
+	
+
+	return 0;
+}
+>>>>>>> 11845312a97030f7452e96cefae91a32579fd0f7
