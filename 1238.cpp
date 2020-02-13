@@ -39,8 +39,8 @@ int bfs(int src){
 		if(visited[i]>=max_level){
 			max_level=visited[i];
 			if (i>max_node){
-				printf("max_level: %d\n", max_level);
-				printf("max node changed from %d to %d\n", max_node, i);
+//				printf("max_level: %d\n", max_level);
+//				printf("max node changed from %d to %d\n", max_node, i);
 				max_node=i;
 			}
 		}
