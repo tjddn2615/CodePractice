@@ -37,10 +37,10 @@ int bfs(int arr[], int arr_len, int num){
 		int level = q.front().second;
 		q.pop();
 
-		if(level==0 && !visited.find(origin)->first){
-			cout << "to final: " << origin << endl;
+		if(level==0 /*&& !visited.find(origin)->second*/){
+			//cout << "to final: " << origin << endl;
 			final.push(make_pair(origin, level));
-			visited.insert(make_pair(origin,1));
+			//visited.insert(make_pair(origin,1));
 			//continue;
 			goto end;
 		}
@@ -59,8 +59,9 @@ int bfs(int arr[], int arr_len, int num){
 				swap(tmp[i],tmp[j]);
 				int tmp_num=arrtonum(tmp, arr_len);
 				//cout << "tmp_num: " << tmp_num << ", level: " << level <<  endl;
-				if(level >= 0){
-					cout << "pushed: " << tmp_num << ", level: " << level-1 <<  endl;
+				if(level >= 0 && visited.find(tmp_num)->second==0){
+                    visited.insert(make_pair(tmp_num,1));
+					//cout << "pushed: " << tmp_num << ", level: " << level-1 <<  endl;
 					q.push(make_pair(tmp_num,level-1)); //prevent iteration 	
 				}
 				
