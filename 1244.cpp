@@ -20,7 +20,7 @@ int bfs(int arr[], int arr_len, int num){
 
 	queue<pair<int, int> > q;
 	queue<pair<int, int> > final;
-	map<int> visited;
+	map<int, int> visited;
 	// int first=arr[0];
 	// for(int i=1;i<arr_len;i++){
 	// 	first*=10;
@@ -28,22 +28,29 @@ int bfs(int arr[], int arr_len, int num){
 	// }
 	int first=arrtonum(arr,arr_len);
 
-	cout << "first" <<first << endl;
-
+	//cout << "first" <<first << endl;
 	q.push(make_pair(first,num));
 
 	
-	while(!q.empty() && q.front().second > 0){
+	while(!q.empty()){
 		int origin=q.front().first;
 		int level = q.front().second;
 		q.pop();
+
+		if(level==0 && !visited.find(origin)->first){
+			cout << "to final: " << origin << endl;
+			final.push(make_pair(origin, level));
+			visited.insert(make_pair(origin,1));
+			//continue;
+			goto end;
+		}
 
 		int changed[6];
 		for(int i=arr_len-1;i>=0;i--){
 			changed[i]=origin%10;
 			origin/=10;
 		}
-		//cout << "origin" << changed[0] << changed[1] << changed[2] << endl;
+		//cout << "origin" << changed[0] << changed[1] << changed[2] << changed[3] << changed[4] << changed[5] << endl;
 
 		for(int i=0;i<arr_len;i++){
 			for(int j=i;j<arr_len;j++){
@@ -51,27 +58,27 @@ int bfs(int arr[], int arr_len, int num){
 				copy(changed,changed+arr_len,tmp);	
 				swap(tmp[i],tmp[j]);
 				int tmp_num=arrtonum(tmp, arr_len);
-				cout << "tmpnum" << tmp_num << endl;
-				if(level-1>0){
-					q.push(make_pair(tmp_num,level--)); //prevent iteration 
-				}else{
-					final.push(make_pair(tmp_num,level--));
+				//cout << "tmp_num: " << tmp_num << ", level: " << level <<  endl;
+				if(level >= 0){
+					cout << "pushed: " << tmp_num << ", level: " << level-1 <<  endl;
+					q.push(make_pair(tmp_num,level-1)); //prevent iteration 	
 				}
+				
 			}
 		}
-
+		end:;
 	}
 
 	int max=0;
 	while(!final.empty()){
 		if(final.front().first>max){
 			max=final.front().first;
-			cout << "" << max << endl;
+			cout << "max: " << max << endl;
 		}
 		final.pop();
 	}
 
-	return 0;
+	return max;
 }
  
 
@@ -94,30 +101,13 @@ int main(){
 		arr_len=strlen(arr_tmp);
 		for(i=0;i<arr_len;i++){
 			arr[i]=arr_tmp[i]-'0';
-			cout <<i << endl;
+		//	cout <<i << endl;
 		}
 		//cout <<arr[0] <<arr[1]<<arr[2];
 		cin >> num;
 
 		int result = bfs(arr, arr_len, num);
 
-		
-		// int swap_cnt=0;
-		// for(i=0;i<6;i++){
-		// 	int minn = arr[i];
-		// 	int location = i;
-		// 	for(int j=i+1;j<8;j++){
-		// 		if(minn<arr[j]){
-		// 			minn=arr[j];
-		// 			location=j;
-		// 		}
-		// 	}
-		// 	swap(arr[i],arr[location]);
-		// 	swap_cnt++;
-		// 	if(swap_cnt>=num){
-		// 		break;
-		// 	}
-		// }
 
 		cout << "#" << t << " " << result << endl;
 
