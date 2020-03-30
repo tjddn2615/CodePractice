@@ -4,21 +4,56 @@
 #include <algorithm>//sort()
 #include <vector>
 
+//https://mattlee.tistory.com/47
+
+
 using namespace std;
+
+int parent[1001];
+int num[1001];
 
 struct Edge {
 	int src, dest;
 	long long value;
 };
 
-int set_find(int node){
+int set_init(int n){
 
-	int parent,
-	
+	int i;
 
+	for(i=0;i<n;i++){
+		parent[i]=-1;
+		num[i]=1;
+	}
 }
 
+int set_find(int node){
 
+	int p, root, i=-1;
+	
+	for(i=node;(p=parent[i])>=0;i=p);
+
+	root=i;
+
+	for(i=node; (p=parent[i])>=0; i=p){
+		parent[i]=root;
+	}
+
+	return root;
+}
+
+void set_union(int s1, int s2){
+
+	if (num[s1] < num[s2]){
+		parent[s1]=s2;
+		num[s2] += num[s1];
+	}else{
+		parent[s2]=s1;
+		num[s1] += num[s2];
+	}
+
+
+}
 
 
 
@@ -55,15 +90,14 @@ int main(){
 		cin >> E;
 
 		//input check
-		cout << island_num << endl;
-		for(i=0;i<island_num;i++){
-			cout << island_pos[i][0] << endl;
-		}
-		for(i=0;i<island_num;i++){
-			cout << island_pos[i][1] << endl;
-		}
-		cout << E << endl;
-
+		// cout << island_num << endl;
+		// for(i=0;i<island_num;i++){
+		// 	cout << island_pos[i][0] << endl;
+		// }
+		// for(i=0;i<island_num;i++){
+		// 	cout << island_pos[i][1] << endl;
+		// }
+		// cout << E << endl;
 
 
 		//what I have to find:
@@ -73,6 +107,8 @@ int main(){
 		// abs(x2-x1) + abs(y2-y1)
 
 		//kruskal algorithm
+
+		set_init(island_num);
 
 		//every edge value input
 		for(i=0;i<island_num;i++){
@@ -91,11 +127,13 @@ int main(){
 
 		sort(v.begin(), v.end(), cmp);
 
-		cout << "sorted" << endl;
+		//cout << "sorted" << endl;
+		// for(i=0;i<v.size();i++){
+		// 	cout << "test: " << v[i].src << " > " << v[i].dest << " = " << v[i].value << endl; 
+		// }
 
-		for(i=0;i<v.size();i++){
-			cout << "test: " << v[i].src << " > " << v[i].dest << " = " << v[i].value << endl; 
-		}
+		//값
+		long long sum=0;
 
 		//kruskal
 		for(i=0;i<v.size();i++){
@@ -103,17 +141,19 @@ int main(){
 			int sset = set_find(v[i].src);
 			int dset = set_find(v[i].dest);
 
+			//edge가 만나지 않으므로 합친다.
 			if(sset!=dset){
-				//edge가 만나지 않으므로 합친다.
 				sum+=v[i].value;
+				//cout << "sum: " << sum << endl;
 				set_union(sset,dset);
 			}
-
-
 		}
+		//cout << fixed;
+		///cout.precision(0);
+		//cout << "#" << T << " " << sum*E << endl;
+		printf("#%d %.0lf\n", T, sum*E);
 
-
-	}
+	}//test case
 
 
 
