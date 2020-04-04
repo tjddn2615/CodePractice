@@ -46,7 +46,6 @@ vector<int> solution(vector<string> genres, vector<int> plays) {
         count_v.push_back(make_pair(tmp_s, tmp_i));
     }
     
-    
     //전체 크기
     sort(count_v.begin(),count_v.end(), cmp);
     
