@@ -42,7 +42,7 @@ int solution(string answer_sheet, vector<string> sheets) {
             }
         }
     }
-    }
+
     int dbt_cnt=0;
     for(i=0;i<answer_sheet.size();i++){
         if(doubt[i]==1){
