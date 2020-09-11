@@ -51,7 +51,6 @@ string check_middle(vector<int> left, vector<int> right, int n, string hand) {
 }
 
 
-
 string solution(vector<int> numbers, string hand) {
     string answer = "";
     vector<int> left;
