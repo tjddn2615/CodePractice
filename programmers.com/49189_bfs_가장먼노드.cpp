@@ -6,40 +6,40 @@
 
 using namespace std;
 
-vector<int> dist;
 
 
-
-int bfs (int start, vector<vector<bool>>& graph) {
+int bfs (int start, vector<vector<bool>>& graph, vector<int>& dist) {
 
 	queue<pair<int, int>> q;
 
 	q.push(make_pair(start, 0));
 	dist[start]=0;
+	int maxv = 0;
 
 	while(!q.empty()){
 		int x = q.front().first;
 		int level = q.front().second;
 		//cout << x << " " << dist[x] << " " << level << endl;
-		dist[x] = dist[x]<0 ? level : min(dist[x], level);
-		q.pop();
+		//dist[x] = dist[x]<0 ? level : min(dist[x], level);
+		if(dist[x] > maxv) maxv=dist[x];
 
 		for(int i = 0; i < graph.size(); i++){
 			if(graph[x][i] && dist[i] == -1){
 				q.push(make_pair(i, level+1));
+				dist[i] = level+1;
+				//cout << i << " " << level+1 << endl;
 			}
 		}
+		q.pop();
 	}
 
-
-	return 0;
-
+	return maxv;
 }
-
 
 int solution(int n, vector<vector<int>> edge) {
     int answer = 0;
     vector<vector<bool>> graph (n, vector<bool>(n, false));
+	vector<int> dist;
 
     for(int i = 0;i < n;i++){
     	dist.push_back(-1);
@@ -51,7 +51,7 @@ int solution(int n, vector<vector<int>> edge) {
     }
 
 
-    bfs(0, graph);
+    int maxv = bfs(0, graph, dist);
 
     // cout << endl;
 
@@ -67,7 +67,7 @@ int solution(int n, vector<vector<int>> edge) {
     // }cout << endl;
 
     //vector 최대값 algorithm 헤더 필요
-    int maxv = *max_element(dist.begin(), dist.end());
+    //int maxv = *max_element(dist.begin(), dist.end());
 
     for(int i = 0;i< dist.size() ; i ++){
     	if(dist[i] == maxv){

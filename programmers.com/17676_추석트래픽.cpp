@@ -44,7 +44,7 @@ int solution(vector<string> lines) {
         double t = stod(strtok(temp[2],'s')[0]);
 
         t_list.push_back({s - t + 0.001, s});
-        cout << s - t + 0.001 << " | " << s << endl;
+        //cout << s - t + 0.001 << " | " << s << endl;
     }
 
     for(int i = 0;i<t_list.size();i++){
@@ -54,7 +54,7 @@ int solution(vector<string> lines) {
     	int tmp=0;
     	for(int j = i;j<t_list.size(); j++){
     		if(abs(t_list[j][1] - begin) >= epsilon && abs(t_list[j][0] - end) <= epsilon){
-    			cout << begin << " | " << end;
+    			//cout << begin << " | " << end;
     			tmp++;
     		}
     	}
