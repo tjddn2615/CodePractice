@@ -15,7 +15,7 @@ vector<string> strtok(string str, char delim = ' '){
 
 	for(int i=0;i<str.size();i++){
 		if(str[i] == delim){
-			ret.push_back(str.substr(prev,i - prev));
+			ret.push_back(str.substr(prev, i - prev));
 			prev = i + 1;
 		}
 	}
