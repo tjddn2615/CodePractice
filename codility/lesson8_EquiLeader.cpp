@@ -1,18 +1,20 @@
+
 // you can use includes, for example:
-#include <algorithm>
+// #include <algorithm>
 #include <map>
 
 // you can write to stdout for debugging purposes, e.g.
 // cout << "this is a debug message" << endl;
 
-
-int find_leader(vector<int> A, int start, int end) {
+int solution(vector<int> &A) {
+    // write your code in C++14 (g++ 6.2.0)
+    int ans=0;
     
     map<int,int> m;
     int maxv=0;
-    int maxa=-1;
+    int maxi=-1;
     
-    for(int i = start ;i < end; i++){
+    for(int i = 0 ;i < A.size(); i++){
         if(m.count(A[i])){
             m[A[i]]++;
         }
@@ -21,35 +23,31 @@ int find_leader(vector<int> A, int start, int end) {
         }
         if(m[A[i]] > maxv) {
             maxv = m[A[i]];
-            maxa = A[i];
+            maxi = A[i];
         }
     }
     
-    cout << "max: " << maxv << " " << maxa << endl;
-    cout << end-start << endl;
+    if(maxv <= A.size()/2) {
+        cout << "ERROR" << endl;
+        return 0;
+    }
     
-    return maxv <= ((end-start)/2) ? -1 : maxa;
-}
-
-
-
-int solution(vector<int> &A) {
-    // write your code in C++14 (g++ 6.2.0)
     
-    int ans = 0;
-    
-    for(int i = 1 ;i < A.size(); i++){
-        
-        int tmp1 = find_leader(A, 0, i);
-        int tmp2 = find_leader(A, i, A.size());
-        
-        cout << 0 << " " << i << " " << A.size() << endl; 
-        cout << tmp1 << " " << tmp2 << endl;
-        
-        if(tmp1 == tmp2) {
-            ans++;
+    int count = 0;
+    for(int i = 0 ;i < A.size()-1; i++){
+        if(A[i] == maxi) {
+            count ++;
+            m[maxi]--;
         }
         
+        cout << "index " << A.size()-(i+1) << " " << (i+1) << endl;
+        cout << "div/2 " << (A.size()-(i+1))/2 << " " << (i+1)/2 << endl;
+        cout << "count " << m[maxi] << " " << count << endl;
+        cout << endl;
+        if(m[maxi] > (double)(A.size()-(i+1))/2 && count > (i+1)/2){
+            cout << "answer " << i << " increase" << endl;
+            ans ++;
+        }
     }
     
     return ans;
